@@ -36,8 +36,4 @@ export class QueryUserDto {
   age?: number;
 
   school?: string;
-
-  limit: number;
-
-  page: number;
 }
