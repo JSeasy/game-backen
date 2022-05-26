@@ -15,6 +15,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     const exceptionResponse = exception.getResponse();
 
+    console.log(1);
     if (typeof exceptionResponse === 'string') {
       response.send({
         data: null,
