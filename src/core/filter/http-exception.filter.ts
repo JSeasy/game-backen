@@ -14,7 +14,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const status = exception.getStatus(); // 获取异常状态码
 
     const exceptionResponse = exception.getResponse();
-
+    console.log(exceptionResponse);
     response.status(status);
     if (typeof exceptionResponse === 'string') {
       response.send({

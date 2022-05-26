@@ -15,8 +15,7 @@ export class UserService {
     const { userName } = createUserDto;
     const result = await this.usersRepository.findOne({ where: { userName } });
     if (!result) {
-      await this.usersRepository.save(createUserDto);
-      return '注册成功';
+      return this.usersRepository.save(createUserDto);
     } else {
       throw new HttpException('用户已存在', 401);
     }
