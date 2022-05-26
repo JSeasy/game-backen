@@ -25,8 +25,7 @@ export class UserController {
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,
     @Query() queryUserDto: QueryUserDto,
   ) {
-    console.log(page, '123123');
-    console.log(queryUserDto);
+    return this.userService.paginate({ ...queryUserDto, page, limit });
   }
 
   @Get(':id')
