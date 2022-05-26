@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { MenuService } from './menu.service';
-import { CreateMenuDto } from './dto/menu.dot';
+import { CreateMenuDto, QueryMenuDto } from './dto/menu.dot';
 
 @Controller('/menu')
 export class MenuController {
@@ -12,8 +12,8 @@ export class MenuController {
   }
 
   @Get()
-  findAll() {
-    return this.menuService.findAll();
+  findAll(@Body() queryMenuDto: QueryMenuDto) {
+    return this.menuService.paginate(queryMenuDto);
   }
 
   @Get(':id')
