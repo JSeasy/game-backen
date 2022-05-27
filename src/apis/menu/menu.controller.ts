@@ -18,7 +18,7 @@ export class MenuController {
 
   @Post()
   create(@Body() createMenuDto: CreateMenuDto) {
-    console.log(createMenuDto);
+    console.log(createMenuDto, 'xxx');
     return this.menuService.create(createMenuDto);
   }
 
@@ -34,5 +34,10 @@ export class MenuController {
   @Get('/tree')
   getTree() {
     return this.menuService.getTree();
+  }
+
+  @Delete(':id')
+  delete(@Param('id') id: number) {
+    return this.menuService.delete(id);
   }
 }
