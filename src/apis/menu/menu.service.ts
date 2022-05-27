@@ -44,7 +44,6 @@ export class MenuService {
   }
 
   async delete(id: number) {
-    console.log(id, 'xxx');
     const result = await this.menuRepository.findOneBy({ id });
     result.deleteDate = new Date();
     await this.menuRepository.save(result);

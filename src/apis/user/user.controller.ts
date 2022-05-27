@@ -7,6 +7,7 @@ import {
   Query,
   DefaultValuePipe,
   ParseIntPipe,
+  HttpCode,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto, QueryUserDto } from './dto/user.dto';
@@ -14,6 +15,7 @@ import { CreateUserDto, QueryUserDto } from './dto/user.dto';
 @Controller('/user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
+
   @Post('/regist')
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
