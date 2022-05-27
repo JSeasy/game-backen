@@ -11,7 +11,10 @@ import {
 } from '@nestjs/common';
 import { MenuService } from './menu.service';
 import { CreateMenuDto, QueryMenuDto } from './dto/menu.dot';
+<<<<<<< HEAD
 import { excuseCurrentPagesizePipe } from 'src/utils/inex';
+=======
+>>>>>>> 6582f40ebcdbe796c9ae4d90ffe8360a61335357
 
 @Controller('/menu')
 export class MenuController {
@@ -23,6 +26,7 @@ export class MenuController {
     return this.menuService.create(createMenuDto);
   }
 
+<<<<<<< HEAD
   @Get('/list')
   getList(
     @Query('current', new DefaultValuePipe(1), ParseIntPipe)
@@ -31,6 +35,11 @@ export class MenuController {
     @Query() queryMenuDto: QueryMenuDto,
   ) {
     return this.menuService.findList(current, pageSize, queryMenuDto);
+=======
+  @Get()
+  findAll(@Body() queryMenuDto: QueryMenuDto) {
+    return this.menuService.paginate(queryMenuDto);
+>>>>>>> 6582f40ebcdbe796c9ae4d90ffe8360a61335357
   }
 
   @Get('/tree')

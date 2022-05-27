@@ -3,6 +3,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateMenuDto, QueryMenuDto } from './dto/menu.dot';
 import { Menu } from './entities/menu.entity';
+import {
+  paginate,
+  Pagination,
+  IPaginationOptions,
+} from 'nestjs-typeorm-paginate';
 
 @Injectable()
 export class MenuService {
@@ -13,7 +18,10 @@ export class MenuService {
 
   async create(createMenuDto: CreateMenuDto) {
     await this.menuRepository.save(createMenuDto);
-    return '添加成功';
+    return;
+  }
+  async paginate(options: IPaginationOptions): Promise<Pagination<Menu>> {
+    return paginate<Menu>(this.menuRepository, options);
   }
 
   async findList(offset: number, limit: number, queryMenuDto: QueryMenuDto) {

@@ -22,6 +22,15 @@ export class UserService {
     }
   }
 
+  async paginate(QueryUserDto) {
+    const users = await this.usersRepository
+      .createQueryBuilder('user')
+      .skip(10)
+      .take(1)
+      .getMany();
+    return users;
+  }
+
   findAll() {
     return `This action returns all user`;
   }

@@ -1,6 +1,15 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Query,
+  DefaultValuePipe,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/user.dto';
+import { CreateUserDto, QueryUserDto } from './dto/user.dto';
 
 @Controller('/user')
 export class UserController {
@@ -11,9 +20,12 @@ export class UserController {
   }
 
   @Get('/list')
-  findAll() {
-    console.log(123123);
-    return this.userService.findAll();
+  findAll(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,
+    @Query() queryUserDto: QueryUserDto,
+  ) {
+    return this.userService.paginate({ ...queryUserDto, page, limit });
   }
 
   @Get(':id')

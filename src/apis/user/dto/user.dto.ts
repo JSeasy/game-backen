@@ -21,3 +21,19 @@ export class CreateUserDto {
   @IsNotEmpty({ message: '学校不能为空!', each: false })
   school: string;
 }
+
+export class QueryUserDto {
+  userName?: string;
+
+  realName?: string;
+
+  password?: string;
+
+  passwordRepeat?: string;
+
+  sex?: number;
+
+  age?: number;
+
+  school?: string;
+}
