@@ -17,6 +17,7 @@ import { Menu } from './apis/menu/entities/menu.entity';
       database: 'test',
       entities: [User, Menu],
       synchronize: true,
+      timezone: '+08:00',
     }),
     MenuModule,
   ],

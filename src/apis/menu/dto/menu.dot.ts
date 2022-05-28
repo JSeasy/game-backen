@@ -10,4 +10,6 @@ export class QueryMenuDto {
   menuName?: string;
   current?: number;
   pageSize?: number;
+  createDateBefore?: string;
+  createDateAfter?: string;
 }

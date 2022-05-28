@@ -21,7 +21,7 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
-  @Get('/list')
+  @Get()
   findAll(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page = 1,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit = 10,

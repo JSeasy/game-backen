@@ -25,8 +25,7 @@ export class UserService {
   async paginate(QueryUserDto) {
     const users = await this.usersRepository
       .createQueryBuilder('user')
-      .skip(10)
-      .take(1)
+      .leftJoinAndSelect('user.menus', 'menus')
       .getMany();
     return users;
   }

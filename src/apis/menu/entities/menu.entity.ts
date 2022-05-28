@@ -1,5 +1,12 @@
+import { User } from 'src/apis/user/entities/user.entity';
 import { BaseEntity } from 'src/baseEntity';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Menu extends BaseEntity {
@@ -20,4 +27,8 @@ export class Menu extends BaseEntity {
 
   @Column({ default: 0 })
   parentId: number;
+
+  @ManyToMany(() => User, (user) => user.menus)
+  @JoinTable()
+  users: User[];
 }

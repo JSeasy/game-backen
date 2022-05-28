@@ -1,11 +1,11 @@
 import { CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
 export class BaseEntity {
-  @CreateDateColumn()
+  @CreateDateColumn({})
   createDate: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({})
   updateDate: Date;
 
-  @DeleteDateColumn()
+  @DeleteDateColumn({})
   deleteDate: Date;
 }
