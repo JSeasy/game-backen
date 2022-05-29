@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { UserModule } from './apis/user/user.module';
-import { DrawModule } from './apis/draw/draw.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './apis/user/entities/user.entity';
 import { MenuModule } from './apis/menu/menu.module';
@@ -17,7 +16,10 @@ import { Menu } from './apis/menu/entities/menu.entity';
       database: 'test',
       entities: [User, Menu],
       synchronize: true,
-      timezone: '+08:00',
+
+      // timezone: 'z',
+      // dateStrings: true,
+      // driver: require('mysql2'),
     }),
     MenuModule,
   ],
