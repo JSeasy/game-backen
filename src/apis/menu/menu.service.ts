@@ -32,9 +32,13 @@ export class MenuService {
 
   //翻页
   async getList(offset: number, limit: number, queryMenuDto: QueryMenuDto) {
-    const { pageSize, current, createDateBefore, createDateAfter, ...params } =
-      queryMenuDto;
-    console.log(createDateAfter, createDateBefore);
+    const {
+      pageSize = 10,
+      current = 1,
+      createDateBefore = new Date(),
+      createDateAfter = new Date(),
+      ...params
+    } = queryMenuDto;
     const total = await this.menuRepository.count();
     const result = await this.menuRepository
       .createQueryBuilder('menu')
@@ -42,10 +46,12 @@ export class MenuService {
       .take(limit)
       .where({
         ...params,
-        // 查询范围
-        // id: Between(2, 3),
+        // createDate: Between(
+        //   new Date(createDateBefore),
+        //   new Date(createDateAfter),
+        // ),
       })
-      .leftJoinAndSelect('menu.users', 'users')
+      // .leftJoinAndSelect('menu.users', 'users')
       .orderBy('menu.id', 'DESC')
       .getMany();
     return {
@@ -64,7 +70,7 @@ export class MenuService {
 
   async delete(id: number) {
     const result = await this.menuRepository.findOneBy({ id });
-    // result.deleteDate = ;
+    result.deleteDate = new Date();
     await this.menuRepository.save(result);
     return null;
   }
