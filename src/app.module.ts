@@ -17,8 +17,9 @@ import { Menu } from './apis/menu/entities/menu.entity';
       entities: [User, Menu],
       synchronize: true,
 
-      // timezone: 'z',
-      // dateStrings: true,
+      // timezone: '+08:00',
+
+      dateStrings: true,
       // driver: require('mysql2'),
     }),
     MenuModule,

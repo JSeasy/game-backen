@@ -16,7 +16,9 @@ export class User extends BaseEntity {
   @Column()
   realName: string;
 
-  @Column()
+  @Column({
+    unique: true,
+  })
   userName: string;
 
   @Exclude()
