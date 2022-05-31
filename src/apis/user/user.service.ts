@@ -32,14 +32,24 @@ export class UserService {
     return users;
   }
 
-  login(userLoginDto) {
-    return this.jwtService.sign(userLoginDto);
+  async login(userLoginDto) {
+    const userInfo = await this.findOneByUserName(userLoginDto.userName);
+    if (userInfo && userInfo.password === userLoginDto.password) {
+      return this.jwtService.sign({
+        sub: userInfo.id,
+        username: userInfo.userName,
+      });
+    } else {
+      throw new BadRequestException('用户不存在');
+    }
   }
 
   findOne(id: number) {
     return `This action returns a #${id} user`;
   }
-
+  async findOneByUserName(userName: string) {
+    return await this.usersRepository.findOneBy({ userName });
+  }
   update(id: number) {
     return `This action updates a #${id} user`;
   }
