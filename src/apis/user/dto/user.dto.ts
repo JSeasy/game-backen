@@ -22,18 +22,8 @@ export class CreateUserDto {
   school: string;
 }
 
-export class QueryUserDto {
-  userName?: string;
+export class UserLoginDto {
+  userName: string;
 
-  realName?: string;
-
-  password?: string;
-
-  passwordRepeat?: string;
-
-  sex?: number;
-
-  age?: number;
-
-  school?: string;
+  password: string;
 }

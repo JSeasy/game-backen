@@ -3,12 +3,14 @@ import { CreateUserDto } from './dto/user.dto';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
+    private readonly jwtService: JwtService,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
@@ -30,8 +32,8 @@ export class UserService {
     return users;
   }
 
-  findAll() {
-    return `This action returns all user`;
+  login(userLoginDto) {
+    return this.jwtService.sign(userLoginDto);
   }
 
   findOne(id: number) {

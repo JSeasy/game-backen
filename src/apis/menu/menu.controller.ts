@@ -24,11 +24,11 @@ export class MenuController {
 
   @Get()
   getList(
-    @Query('current', new DefaultValuePipe(1), ParseIntPipe) current: number,
-    @Query('pageSize', new DefaultValuePipe(10), ParseIntPipe) pageSize: number,
+    // @Query('current', new DefaultValuePipe(1), ParseIntPipe) current: number,
+    // @Query('pageSize', new DefaultValuePipe(10), ParseIntPipe) pageSize: number,
     @Query() queryMenuDto: QueryMenuDto,
   ) {
-    return this.menuService.getList(current, pageSize, queryMenuDto);
+    return this.menuService.getList(queryMenuDto);
   }
 
   @Get('/tree')

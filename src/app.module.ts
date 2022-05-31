@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './apis/user/entities/user.entity';
 import { MenuModule } from './apis/menu/menu.module';
 import { Menu } from './apis/menu/entities/menu.entity';
+import { DrawModule } from './apis/draw/draw.module';
 @Module({
   imports: [
     UserModule,
@@ -23,6 +24,7 @@ import { Menu } from './apis/menu/entities/menu.entity';
       // driver: require('mysql2'),
     }),
     MenuModule,
+    DrawModule,
   ],
   providers: [],
 })

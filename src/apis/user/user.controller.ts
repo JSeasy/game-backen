@@ -8,10 +8,12 @@ import {
   DefaultValuePipe,
   ParseIntPipe,
   HttpCode,
+  Injectable,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto, QueryUserDto } from './dto/user.dto';
+import { CreateUserDto, UserLoginDto } from './dto/user.dto';
 
+@Injectable()
 @Controller('/user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -21,13 +23,9 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
-  @Get()
-  findAll(
-    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page = 1,
-    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit = 10,
-    @Query() queryUserDto: QueryUserDto,
-  ) {
-    return this.userService.paginate({ ...queryUserDto, page, limit });
+  @Post('/login')
+  login(@Body() userLoginDto: UserLoginDto) {
+    return this.userService.login(userLoginDto);
   }
 
   @Get(':id')

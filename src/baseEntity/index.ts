@@ -1,4 +1,10 @@
-import { CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
+import dayjs from 'dayjs';
+import {
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+  AfterLoad,
+} from 'typeorm';
 export class BaseEntity {
   @CreateDateColumn({
     type: 'timestamp',
@@ -20,7 +26,6 @@ export class BaseEntity {
         return value ? value.slice(0, 19) : value;
       },
       to: (value) => {
-        console.log(value, 'ssss');
         return value;
       },
     },

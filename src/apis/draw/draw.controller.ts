@@ -12,7 +12,7 @@ import { DrawService } from './draw.service';
 import { CreateDrawDto } from './dto/create-draw.dto';
 import { UpdateDrawDto } from './dto/update-draw.dto';
 
-@Controller('draw')
+@Controller('/draw')
 export class DrawController {
   constructor(private readonly drawService: DrawService) {}
 

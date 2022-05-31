@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import dayjs from 'dayjs';
+
 import { arrToTree } from 'src/utils/inex';
 import { Between, Repository } from 'typeorm';
 import { User } from '../user/entities/user.entity';
 import { CreateMenuDto, QueryMenuDto } from './dto/menu.dot';
 import { Menu } from './entities/menu.entity';
-
+import { createLikeParams } from '../../utils/inex';
 @Injectable()
 export class MenuService {
   constructor(
@@ -31,34 +31,22 @@ export class MenuService {
   }
 
   //翻页
-  async getList(offset: number, limit: number, queryMenuDto: QueryMenuDto) {
-    const {
-      pageSize = 10,
-      current = 1,
-      createDateBefore = new Date(),
-      createDateAfter = new Date(),
-      ...params
-    } = queryMenuDto;
+  async getList(queryMenuDto: QueryMenuDto) {
+    const { pageSize = 10, current = 1, ...params } = queryMenuDto;
     const total = await this.menuRepository.count();
     const result = await this.menuRepository
       .createQueryBuilder('menu')
-      .skip((offset - 1) * limit)
-      .take(limit)
-      .where({
-        ...params,
-        // createDate: Between(
-        //   new Date(createDateBefore),
-        //   new Date(createDateAfter),
-        // ),
-      })
+      .skip((current - 1) * pageSize)
+      .take(pageSize)
+      .where(createLikeParams(['iconName'], params))
       // .leftJoinAndSelect('menu.users', 'users')
       .orderBy('menu.id', 'DESC')
       .getMany();
     return {
       total,
       data: result,
-      current: offset,
-      pageSize: limit,
+      current,
+      pageSize,
     };
   }
 
