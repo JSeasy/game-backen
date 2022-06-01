@@ -10,9 +10,6 @@ import {
 
 @Entity()
 export class Menu extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
-
   @Column()
   menuName: string;
 

@@ -10,11 +10,14 @@ import {
   ParseIntPipe,
   Request,
   UseGuards,
+  HttpCode,
+  BadRequestException,
+  HttpException,
 } from '@nestjs/common';
 import { MenuService } from './menu.service';
 import { CreateMenuDto, QueryMenuDto } from './dto/menu.dot';
 import { AuthGuard } from '@nestjs/passport';
-@UseGuards(AuthGuard('jwt'))
+// @UseGuards(AuthGuard('jwt'))
 @Controller('/menu')
 export class MenuController {
   constructor(private readonly menuService: MenuService) {}
@@ -25,6 +28,7 @@ export class MenuController {
     return this.menuService.create(createMenuDto);
   }
 
+  @HttpCode(500)
   @Get()
   getList(
     // @Query('current', new DefaultValuePipe(1), ParseIntPipe) current: number,
@@ -32,8 +36,13 @@ export class MenuController {
     @Query() queryMenuDto: QueryMenuDto,
     @Request() requset: any,
   ) {
-    console.log(requset.user);
-    return this.menuService.getList(queryMenuDto);
+    // console.log(requset.user);
+    // return this.menuService.getList(queryMenuDto);
+    throw new BadRequestException('发送错误');
+    // return {
+    //   statusCode: 400,
+    //   message: '123123',
+    // };
   }
 
   @Get('/tree')
