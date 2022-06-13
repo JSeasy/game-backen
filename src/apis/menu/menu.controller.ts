@@ -28,7 +28,7 @@ export class MenuController {
     return this.menuService.create(createMenuDto);
   }
 
-  @HttpCode(500)
+  // @HttpCode(500)
   @Get()
   getList(
     // @Query('current', new DefaultValuePipe(1), ParseIntPipe) current: number,
