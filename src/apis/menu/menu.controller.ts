@@ -30,19 +30,8 @@ export class MenuController {
 
   // @HttpCode(500)
   @Get()
-  getList(
-    // @Query('current', new DefaultValuePipe(1), ParseIntPipe) current: number,
-    // @Query('pageSize', new DefaultValuePipe(10), ParseIntPipe) pageSize: number,
-    @Query() queryMenuDto: QueryMenuDto,
-    @Request() requset: any,
-  ) {
-    // console.log(requset.user);
-    // return this.menuService.getList(queryMenuDto);
-    throw new BadRequestException('发送错误');
-    // return {
-    //   statusCode: 400,
-    //   message: '123123',
-    // };
+  getList(@Query() queryMenuDto: QueryMenuDto, @Request() requset: any) {
+    return this.menuService.getList(queryMenuDto);
   }
 
   @Get('/tree')
