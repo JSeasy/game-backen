@@ -1,12 +1,6 @@
 import { User } from 'src/apis/user/entities/user.entity';
 import { BaseEntity } from 'src/baseEntity';
-import {
-  Column,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
 
 @Entity()
 export class Menu extends BaseEntity {
